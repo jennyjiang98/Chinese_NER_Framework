@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+            <meta http-equiv="Content-Type" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                    <meta name="referrer" content="always">
+
+                        <title>NER可视化</title>
+
+                        <link rel="shortcut icon" href="/static/assets/img/favicon.ico">
+                            <link rel="alternate" type="application/rss+xml" title="RSS" href="/static/feed.xml">
+                                <link rel="stylesheet" href="https://d33wubrfki0l68.cloudfront.net/bundles/79ce8f91f76d2575c44f2f3da07ad66a2fd0c41b.css">
+                                    <!-- Bootstrap和上面这个冲突 -->
+                                    <link href="http://10.2.182.55:8000/static/css/bootstrap.min.css" rel="stylesheet">
+
+
+                                        <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+                                    </head>
+
+                                    <body>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+       <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+       <script type="text/javascript">
+          
+      </script>
+                                        <!--script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"/>
+                                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"/-->
+                                        
+                                        <main class="l-main">
+                                                                                            
+                                                                                             <!--div class="row"-->
+                                            <div class="l-content">
+                                                <article data-demo="displacy-ent">
+                                                    <svg width="0" height="0" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position: absolute; visibility: hidden; width: 0px; height: 0px;">
+
+                                                        <symbol id="svg_spinner" viewBox="0 0 32 32">
+                                                            <path d="M16 32c-4.274 0-8.292-1.664-11.314-4.686s-4.686-7.040-4.686-11.314c0-3.026 0.849-5.973 2.456-8.522 1.563-2.478 3.771-4.48 6.386-5.791l1.344 2.682c-2.126 1.065-3.922 2.693-5.192 4.708-1.305 2.069-1.994 4.462-1.994 6.922 0 7.168 5.832 13 13 13s13-5.832 13-13c0-2.459-0.69-4.853-1.994-6.922-1.271-2.015-3.066-3.643-5.192-4.708l1.344-2.682c2.615 1.31 4.824 3.313 6.386 5.791 1.607 2.549 2.456 5.495 2.456 8.522 0 4.274-1.664 8.292-4.686 11.314s-7.040 4.686-11.314 4.686z"/>
+                                                        </symbol>
+
+                                                        <symbol id="svg_search" viewBox="0 0 24 24">
+                                                            <path d="M10 1q1.828 0 3.496 0.715t2.871 1.918 1.918 2.871 0.715 3.496q0 1.57-0.512 3.008t-1.457 2.609l5.68 5.672q0.289 0.289 0.289 0.711 0 0.43-0.285 0.715t-0.715 0.285q-0.422 0-0.711-0.289l-5.672-5.68q-1.172 0.945-2.609 1.457t-3.008 0.512q-1.828 0-3.496-0.715t-2.871-1.918-1.918-2.871-0.715-3.496 0.715-3.496 1.918-2.871 2.871-1.918 3.496-0.715zM10 3q-1.422 0-2.719 0.555t-2.234 1.492-1.492 2.234-0.555 2.719 0.555 2.719 1.492 2.234 2.234 1.492 2.719 0.555 2.719-0.555 2.234-1.492 1.492-2.234 0.555-2.719-0.555-2.719-1.492-2.234-2.234-1.492-2.719-0.555z"/>
+                                                        </symbol>
+                                                        <symbol id="svg_help" viewBox="0 0 24 28">
+                                                            <path d="M14 21.5v-3c0-0.281-0.219-0.5-0.5-0.5h-3c-0.281 0-0.5 0.219-0.5 0.5v3c0 0.281 0.219 0.5 0.5 0.5h3c0.281 0 0.5-0.219 0.5-0.5zM18 11c0-2.859-3-5-5.688-5-2.547 0-4.453 1.094-5.797 3.328-0.141 0.219-0.078 0.5 0.125 0.656l2.063 1.563c0.078 0.063 0.187 0.094 0.297 0.094 0.141 0 0.297-0.063 0.391-0.187 0.734-0.938 1.047-1.219 1.344-1.437 0.266-0.187 0.781-0.375 1.344-0.375 1 0 1.922 0.641 1.922 1.328 0 0.812-0.422 1.219-1.375 1.656-1.109 0.5-2.625 1.797-2.625 3.313v0.562c0 0.281 0.219 0.5 0.5 0.5h3c0.281 0 0.5-0.219 0.5-0.5v0c0-0.359 0.453-1.125 1.188-1.547 1.188-0.672 2.812-1.578 2.812-3.953zM24 14c0 6.625-5.375 12-12 12s-12-5.375-12-12 5.375-12 12-12 12 5.375 12 12z"/>
+                                                        </symbol>
+
+
+                                                    </svg>
+                                                    <header class="d-header d-wrapper l-wrapper">
+                                                        <h1 class="u-h2 u-b-sm">NER 可视化</h1>
+                                                        <!--form action="/result/" method="POST"-->
+                                                        <form action="">
+                                                            
+                                                                <div class="u-t-md">
+                                                                    <div class="d-input d-input--full">
+                                                                        <div class="d-input__wrapper">
+                                                                            <input type="text" id="text" name="text" rows="15" cols="15" placeholder="Your text here..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" onfocus="this.select()" required="required" class="d-input__field d-input__field--textarea">
+                                                                                <button type="button" id = "button" onclick="myFunction()" aria-label="Submit" class="d-button" style="min-width: 40px;">
+                                                                                    <svg aria-hidden="true" viewBox="0 0 40 40" width="40" height="40" class="o-icon" style="min-width: 40px;">
+                                                                                        <use xlink:href="#svg_search"/></use></svg>
+                                                                                     
+                                                                                    
+                                                                                    <!---->
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-input">
+                                                                            <label class="u-b-xs u-block u-h6">Model <span data-tooltip="Statistical language model to use" class="d-input__help u-hide-sm">
+                                                                                    <svg aria-hidden="true" viewBox="0 0 16 16" width="16" height="16" class="o-icon" style="min-width: 16px;">
+                                                                                        <use xlink:href="#svg_help"/>
+                                                                                    </svg>
+                                                                                </span>
+                                                                            </label>
+                                                                            <div class="d-input__wrapper">
+                                                                                <select id="model" class="d-select">
+                                                                                    <option value="english">English</option>
+                                                                                    <option value="chinese">Chinese</option>
+                                                                                    
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </header>
+                                                            <section class="d-content l-wrapper u-b-lg l-wrapper--page u-t-md">
+                                                                <div id="myDiv">
+            <div class="progress progress-striped active">
+        <div id="prog" class="progress-bar" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width:0%;">
+            <span id="proglabel">正在启动，请稍后......</span>
+        </div>
+    </div>    
+    <!--div class="form-group">
+        <div class="col-sm-offset-4 col-sm-6">
+            <button id="pause" class="btn btn-primary" value="pause">暂停</button>
+            <button id="stop" class="btn btn-primary" value="stop">停止</button>
+            <button id="goon" class="btn btn-primary">继续</button>
+        </div>
+    </div -->      
+
+            
+            </div>
+                                                            </section>
+                                                        </article>
+                                                    </div>
+                                                    <!--/div-->
+                                                     <!--div class="row"-->
+       
+            
+       
+    <!--/div-->
+
+<!--div class="row"-->
+                                                    <footer class="l-footer">
+                                                        <section class="u-b-md">
+                                                            <h4 class="u-h6 u-b-xs">作者</h4>
+                                                            <p class="u-t-sm u-b-sm">靳立晨1600012459 蒋莹1600017818</p>
+                                                        </section>
+                                                    </footer>
+                                                    <!--/div-->
+                                                    
+                                                </main>
+                                                <!--script src="https://d33wubrfki0l68.cloudfront.net/bundles/fe69ba4998c8a8e8fba46be89eacbd58f73e22be.js" -->
+                                                <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date; ga('create', 'UA-84293596-1', 'auto'); ga('send', 'pageview');</script>
+                                                <!--script async="" src="https://www.google-analytics.com/analytics.js" ></script-->
+                                                
+                                                <script>
+
+var xmlhttp;
+function loadResult(url,cfunc)
+{
+if (window.XMLHttpRequest)
+  {// IE7+, Firefox, Chrome, Opera, Safari 代码
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// IE6, IE5 代码
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  text = document.getElementById("text");
+  model = document.getElementById("model");
+  
+xmlhttp.onreadystatechange=cfunc;
+
+xmlhttp.open("post", "/result/",true);
+
+
+
+xmlhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset-UTF-8");
+xmlhttp.send("text="+text.value+"&model="+model.value);//问题：手动吧空格换了？？text字符串里可能出现;等标点符号导致结束？？？js怎么解决
+$(document).ready(function(){
+              var value = 0;
+              var time = 50;
+              //进度条复位函数
+              function reset( ) {
+                value = 0
+                  $("#prog").removeClass("progress-bar-success").css("width","0%").text("等待启动");
+                  //setTimeout(increment,5000);
+              }
+              //百分数增加，0-30时为红色，30-60为黄色，60-90为蓝色，>90为绿色
+              function increment( ) {
+                  value += 1;
+                  $("#prog").css("width",value + "%").text(value + "%");
+                  if (value>=0 && value<=30) {
+                      $("#prog").addClass("progress-bar-danger");
+                  }
+                  else if (value>=30 && value <=60) {
+                      $("#prog").removeClass("progress-bar-danger");
+                      $("#prog").addClass("progress-bar-warning");
+                  }
+                  else if (value>=60 && value <=90) {
+                      $("#prog").removeClass("progress-bar-warning");
+                      $("#prog").addClass("progress-bar-info");
+                  }
+                  else if(value >= 90 && value<100) {
+                      $("#prog").removeClass("progress-bar-info");
+                      $("#prog").addClass("progress-bar-success");    
+                  }
+                  else{
+                      setTimeout(reset,3000);
+                      return;
+
+                  }
+
+                  st = setTimeout(increment,time);
+              }
+
+              increment();
+              //进度条停止与重新开
+              /*
+              $("#stop").click(function () {
+                  if ("stop" == $("#stop").val()) {
+                      //$("#prog").stop();
+                      clearTimeout(st);
+                      $("#prog").css("width","0%").text("等待启动");
+                      $("#stop").val("start").text("重新开始");
+                  } else if ("start" == $("#stop").val()) {
+                      increment();
+                      $("#stop").val("stop").text("停止");                      
+                  }
+              });
+              //进度条暂停与继续
+              $("#pause").click(function() {
+                  if ("pause" == $("#pause").val()) {
+                      //$("#prog").stop();
+                      clearTimeout(st);
+                      $("#pause").val("goon").text("继续");
+                  } else if ("goon" == $("#pause").val()) {
+                      increment();
+                      $("#pause").val("stop").text("暂停");
+                  }
+              });*/
+          });
+}
+function myFunction()
+{
+    document.getElementById("myDiv").innerHTML='<div class="progress progress-striped active">\
+        <div id="prog" class="progress-bar" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width:0%;">\
+            <span id="proglabel">正在启动，请稍后......</span>\
+        </div></div>';
+	loadResult("/result",function()
+	{
+        
+      if (xmlhttp.readyState==4)
+      {// 4 = "loaded"
+          if (xmlhttp.status==200)
+            {
+            var str = xmlhttp.responseText;
+            //var afterstr = str.replace(/&lt;/g,"<");
+            var afterstr = str.split('&lt;').join('<');
+            //var afterstr2 = afterstr.replace(/&rt;/g,">");
+            var afterstr2 = afterstr.split('&gt;').join('>');
+
+            document.getElementById("myDiv").innerHTML=afterstr2;
+            document.getElementById("button").innerHTML='<svg aria-hidden="true" viewBox="0 0 40 40" width="40" height="40" class="o-icon" style="min-width: 40px;"><use xlink:href="#svg_search"/></use></svg>'
+		
+            }
+          else
+            {
+            alert("Problem retrieving XML data");
+            }
+      }
+		
+      else if (xmlhttp.readyState==1){
+            document.getElementById("button").innerHTML='<svg aria-hidden="false" viewBox="0 0 32 32" width="32" height="32" class="o-icon d-button__spinner" style="min-width: 32px"><use xlink:href="#svg_spinner"></use></svg>';
+      
+            }
+      else if (xmlhttp.readyState==2){
+            
+            }
+      else if (xmlhttp.readyState==3){
+            
+            }
+
+	});
+};
+
+
+
+
+                                                </script>
+                                               
+                                                <link rel="stylesheet" href="//hello.myfonts.net/count/323b37">
+
+
+
+
+                                                </body>
+                                            </html>
